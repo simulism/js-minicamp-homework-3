@@ -33,7 +33,7 @@ function multiplyMysteryNumberByFive(mysteryNumberObject) {
 function deleteProperty(object, property) {
   // remove the property from the object
   // return the object
-  delete object.property;
+  delete object[property];
   return object;
 }
 
@@ -76,7 +76,8 @@ function verifyPassword(user, password) {
   // check to see if the provided password matches the password property on the user object
   // return true if they match
   // otherwise return false
-  if(user.password == password){
+  if(user.password == password)
+  {
     return true;
   }
   else
@@ -105,7 +106,8 @@ function setUsersToPremium(users) {
   // each user object has the property 'isPremium'
   // set each user's isPremium property to true
   // return the users array
-for (var i = 0; i < users.length; ++i) {
+for (var i = 0; i < users.length; ++i) 
+{
     users[i].isPremium = true;
 }
 return users;
@@ -117,12 +119,13 @@ function sumUserPostLikes(user) {
   // each post object has an integer property called 'likes'
   // sum together the likes from all the post objects
   // return the sum
-  var total;
-  for (var i = 0; i < user.posts.length; ++i) {
-    total = total + user.posts[i].post.likes;
-}
-return total;
-}
+  var sum = 0;
+  user.posts.forEach(function (add) 
+  {
+    sum += add.likes;
+  });
+  return sum;
+  }
 
 
 function addCalculateDiscountPriceMethod(storeItem) {
@@ -133,12 +136,12 @@ function addCalculateDiscountPriceMethod(storeItem) {
   // price -> 20
   // discountPercentage -> .2
   // discountPrice = 20 - (20 * .2)
-  storeItem.calculateDiscountPrice = function () 
-  {  
-    var discount = (this.price - (this.price * this.discountPercentage));
-    return discount;
-  }; 
-
+storeItem.calculateDiscountPrice = function() 
+{
+    var actualDiscount = this.price * this.discountPercentage;
+    return this.price - actualDiscount;
+  };
+  return storeItem;
 }
 
 // Do not modify code below this line.
